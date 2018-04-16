@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="1" author="Wellington A. Silva">
+	
+		<createTable tableName="fpf_origem">
+			<column name="orig_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="orig_dsorigem" type="varchar(60)">
+			</column>
+		</createTable>
+
+		<createTable tableName="fpf_categoria">
+			<column name="cate_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="cate_dscategoria" type="varchar(60)">
+			</column>
+		</createTable>
+
+		<createTable tableName="fpf_produto">
+			<column name="prod_id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			
+			<column name="prod_dsproduto" type="varchar(60)">
+			</column>
+
+			<column name="prod_dtcompra" type="date">
+			</column>
+
+			<column name="prod_vlpreco" type="float">
+			</column>
+
+			<column name="orig_id" type="int">
+			</column>
+
+			<column mame="cate_id" type="int">
+			</column>
+		</createTable>
+
+		<addForeingKeyConstraint baseColumnNames="orig_id"
+			baseTableName="fpf_produto"
+			constraintName="xfk1_produto"
+			referencedColumnNames="orig_id"
+			referencedTablename="fpf_origem" />
+
+		<addForeingKeyConstraint baseColumnNames="cate_id"
+			baseTableName="fpf_produto"
+			constraintName="xfk2_produto"
+			referencedColumnNames="cate_id"
+			referencedTablename="fpf_categoria" />
+	</changeSet>
+</databaseChangeLog>		
+	
